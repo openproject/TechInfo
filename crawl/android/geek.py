@@ -34,4 +34,4 @@ class Geek(object):
                 tag = 'Android'
 
 
-            common.insertInfoToDb(self.conn, title, '', link, category, tag, '极客头条', config.priority_high)
+            common.insertInfoToDb(self.conn, title, '', link, category, tag, '极客头条', config.priority_mid)
