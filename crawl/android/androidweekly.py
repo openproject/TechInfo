@@ -22,9 +22,13 @@ class AndroidWeekly(object):
 
         for searchUserItem in search_user_items:
             if (searchUserItem.a == None):
-                if (searchUserItem.h2.contents[0] == "Sponsored"):
-                    break
-                else:
+                try:
+                    if (searchUserItem.h2.contents[0] == "Sponsored"):
+                        break
+                    else:
+                        continue
+                except Exception as e:
+                    print(str(e))
                     continue
 
             list = searchUserItem.find_all("a", class_=re.compile("article-headline"))

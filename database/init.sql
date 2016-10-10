@@ -31,6 +31,7 @@ CREATE TABLE `feed` (
   `category` varchar(50) DEFAULT NULL,
   `tag` varchar(500) DEFAULT NULL,
   `source` varchar(50) DEFAULT NULL,
+  `priority` int(11) DEFAULT NULL,
   `created` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `feed_id_uindex` (`id`)
