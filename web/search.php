@@ -5,7 +5,7 @@
 	//改成自己的mysql数据库用户名
 	$mysql_password = '<db_password>';
 	//改成自己的mysql数据库密码
-	$mysql_database = 'feed';
+	$mysql_database = 'TechInfo';
 	//改成自己的mysql数据库名
 
 	$conn = @mysql_connect($mysql_server_name, $mysql_username, $mysql_password) or die("error connecting");
@@ -19,7 +19,8 @@
 
 	$query = $_POST['query'];
 
-	$sql ="select * from infos where title like '%" . $query . "%'  or summary like '%" . $query . "%'order by id desc";
+	$sql ="select * from feed where title like '%" . $query . "%'  or summary like '%" . $query . "%' order by id desc limit 100";
+
 	$result = mysql_query($sql,$conn); //查询
 	$rows = array();
 //	echo "{\"result\":[";

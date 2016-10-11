@@ -40,7 +40,7 @@
 		<div class="weui-tab_bd">
 			<div class="hd">
 				<h1 class="page_title">技术资讯开放平台</h1>
-				<p class="page_desc">聚焦最新Android资讯(<?php echo $yesterday ?>)</p>
+				<p class="page_desc">聚焦最新Android资讯(历史更多)</p>
 			</div>
 
 			<div id="home_android_container" class="weui-panel weui-panel_access tab_hide">

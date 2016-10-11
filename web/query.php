@@ -20,29 +20,12 @@
             error_reporting(E_ALL);
             ini_set( 'display_errors', 'On' );
         ?>
-		<?php
-			require_once 'common/Utils.php';
-			$utils = new Utils();
-
-			$mysql_server_name='localhost'; //改成自己的mysql数据库服务器
-			$mysql_username='root'; //改成自己的mysql数据库用户名
-			$mysql_password='<db_password>'; //改成自己的mysql数据库密码
-			$mysql_database='TechInfo'; //改成自己的mysql数据库名
-
-			$conn=@mysql_connect($mysql_server_name,$mysql_username,$mysql_password) or die("error connecting") ; //连接数据库
-
-			mysql_query("set names 'utf8'"); //数据库输出编码 应该与你的数据库编码保持一致.南昌网站建设公司百恒网络PHP工程师建议用UTF-8 国际标准编码.
-
-			mysql_select_db($mysql_database); //打开数据库
-
-			$yesterday = date("Y-m-d",time() - 3600*24);
-		?>
 		<div class="page">
-			<div class="page__hd">
+			<div class="hd">
 				<h1 class="page_title">技术资讯开放平台</h1>
-				<p class="page_desc">聚焦最新Android资讯(<?php echo $yesterday ?>)</p>
+				<p class="page_desc">聚焦最新Android资讯(搜索专区)</p>
 			</div>
-			<div class="page__bd">
+			<div class="bd">
 				<div class="weui-search-bar" id="searchBar">
 					        <form class="weui-search-bar__form">
 					            <div class="weui-search-bar__box">
@@ -68,6 +51,36 @@
 			<?php
 				include("footer.php");
 			?>
+		<script type="text/javascript">
+			$(document).ready(function() {
+	            $("form").submit(function() {
+	            	var params = {
+	            		query: $('#searchInput').val()
+	            	};
+					$.ajax({
+						type: "post",
+						url: "search.php",
+						dataType: "json",
+						data: params,
+						success: function(msg){
+							$("#search_result_list").html('');
+				            	var resultHtml = "";
+							for(var seachResultItem in msg) {
+								resultHtml += "<a href=\"" + msg[seachResultItem].link + "\" target=\"_blank\" class=\"weui-media-box weui-media-box_appmsg\">";
+								resultHtml += "<div class=\"weui-media_bd\">";
+								resultHtml += "<h4 class=\"weui-media-box__title\">" + msg[seachResultItem].title +"</h4>";
+								resultHtml += "<p class=\"weui-media-box__desc\">" + msg[seachResultItem].summary + "</p>";
+								resultHtml += "</div>";
+								resultHtml += "</a>";
+							}
+
+							$("#search_result_list").html(resultHtml);
+						}
+					});
+	            	return false;
+	            });
+			});
+		</script>
 <script type="text/javascript">
 
     $(function(){
