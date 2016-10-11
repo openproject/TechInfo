@@ -29,7 +29,7 @@ class Toutiao(object):
 
         for searchUserItem in search_user_items:
 
-            link = searchUserItem.h3.a["href"]
+            link = "http://toutiao.io" + searchUserItem.h3.a["href"]
             title = searchUserItem.h3.a.contents[0]
 
             common.insertInfoToDb(self.conn, title, '', link, '', '', '开发者头条',  config.priority_mid)
