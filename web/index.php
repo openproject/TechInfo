@@ -6,14 +6,11 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
 		<title>Android技术资讯开放平台</title>
 		<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.js"></script>
-		<link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.0.0/weui.min.css" />
+		<link rel="stylesheet" href="css/weui.min.css" />
 		<link rel="stylesheet" href="css/main.css" />
 		<style type="text/css">
 			.tab_hide {
 				display: none;
-			}
-			#bottom_space {
-				height: 80px;
 			}
 			.source_tag {
 				color: #888;
@@ -80,11 +77,11 @@
 									}
 									echo "<a href=\"" . $row["link"] . "\" target=\"_blank\" class=\"weui-media-box weui-media-box_appmsg\">";
 									echo "<div class=\"weui-media__bd\">";
-									echo "<h4 class=\"weui-media__title\">" . $row["title"] ."</h4>";
-									echo "<p class=\"weui-media__desc\">" . $row["summary"] . "</p>";
-                                    echo "<ul class=\"weui-media__info\">";
-                                    echo "    <li class=\"weui-media__info__meta\">" . $utils->getWellTimeByTimestamp($row["created"]) ."</li>";
-                                    echo "    <li class=\"weui-media__info__meta weui-media__info__meta_extra\">" . $row["source"]. "</li>";
+									echo "<h4 class=\"weui-media-box__title\">" . $row["title"] ."</h4>";
+									echo "<p class=\"weui-media-box__desc\">" . $row["summary"] . "</p>";
+                                    echo "<ul class=\"weui-media-box__info\">";
+                                    echo "    <li class=\"weui-media-box__info__meta\">" . $utils->getWellTimeByTimestamp($row["created"]) ."</li>";
+                                    echo "    <li class=\"weui-media-box__info__meta weui-media-box__info__meta_extra\">" . $row["source"]. "</li>";
                                     echo "</ul>";
 					echo "</div>";
 									echo "</a>\n";
@@ -96,7 +93,7 @@
 						</div>
 					</div>
 
-					<div id="home_android_container" class="weui-panel weui-panel_access">
+					<div id="home_android_2_container" class="weui-panel weui-panel_access">
 						<div class="weui-panel__hd">仅供参考(
 							<?php
 								echo date("Y-m-d",time());
@@ -112,12 +109,12 @@
 										continue;
 									}
 									echo "<a href=\"" . $row["link"] . "\" target=\"_blank\" class=\"weui-media-box weui-media-box_appmsg\">";
-									echo "<div class=\"weui-media__bd\">";
-									echo "<h4 class=\"weui-media__title\">" . $row["title"] ."</h4>";
-									echo "<p class=\"weui-media__desc\">" . $row["summary"] . "</p>";
-                                    echo "<ul class=\"weui-media__info\">";
-                                    echo "    <li class=\"weui-media__info__meta\">" . $utils->getWellTimeByTimestamp($row["created"]) ."</li>";
-                                    echo "    <li class=\"weui-media__info__meta weui-media__info__meta_extra\">" . $row["source"]. "</li>";
+									echo "<div class=\"weui-media-box__bd\">";
+									echo "<h4 class=\"weui-media-box__title\">" . $row["title"] ."</h4>";
+									echo "<p class=\"weui-media-box__desc\">" . $row["summary"] . "</p>";
+                                    echo "<ul class=\"weui-media-box__info\">";
+                                    echo "    <li class=\"weui-media-box__info__meta\">" . $utils->getWellTimeByTimestamp($row["created"]) ."</li>";
+                                    echo "    <li class=\"weui-media-box__info__meta weui-media-box__info__meta_extra\">" . $row["source"]. "</li>";
                                     echo "</ul>";
 					echo "</div>";
 									echo "</a>\n";
@@ -125,11 +122,12 @@
 							?>
 						</div>
                     </div>
-<br />
-<br />
-<br />
+		<br />
+		<br />
+		<br />
                     <div class="weui-footer">
                         <p class="weui-footer__links">
+                            <a href="https://github.com/openproject/TechInfo" class="weui-footer__link">搜索</a>
                             <a href="http://www.jayfeng.com" class="weui-footer__link">杰风居出品</a>
                             <a href="https://github.com/openproject/TechInfo" class="weui-footer__link">Github</a>
                         </p>
@@ -320,9 +318,6 @@
 				    <div class="weui_btn_area">
 				        <a class="weui_btn weui_btn_warn" href="javascript:" id="showTooltips">更新到服务器</a>
 				    </div>
-				</div>
-
-				<div id="bottom_space">
 				</div>
 			</div>
 			<div class="weui-tabbar tab_hide">

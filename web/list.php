@@ -4,9 +4,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-		<title>乐至技术资讯平台</title>
+		<title>技术资讯开放平台</title>
 		<script src="//cdn.bootcss.com/jquery/3.1.0/jquery.js"></script>
-		<link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/0.4.3/weui.min.css" />
+		<link rel="stylesheet" href="css/weui.min.css" />
 		<link rel="stylesheet" href="css/main.css" />
 		<style type="text/css">
 			#bottom_space {
@@ -16,7 +16,14 @@
 	</head>
 
 	<body ontouchstart>
+        <?php
+            error_reporting(E_ALL);
+            ini_set( 'display_errors', 'On' );
+        ?>
 		<?php
+			require_once 'common/Utils.php';
+			$utils = new Utils();
+
 			$mysql_server_name='localhost'; //改成自己的mysql数据库服务器
 			$mysql_username='root'; //改成自己的mysql数据库用户名
 			$mysql_password='<db_password>'; //改成自己的mysql数据库密码
@@ -28,44 +35,54 @@
 
 			mysql_select_db($mysql_database); //打开数据库
 
-			$today = date("Y-m-d",time());
-			$last_time = "不知道";
-
-			$sql ="select * from config where name = 'last_time'"; //SQL语句
-			$result = mysql_query($sql,$conn); //查询
-			while($row = mysql_fetch_array($result)) {
-				$last_time = $row["val"];
-			}
+			$yesterday = date("Y-m-d",time() - 3600*24);
 		?>
-		<div class="weui_tab_bd">
+		<div class="weui-tab_bd">
 			<div class="hd">
-				<h1 class="page_title">乐至技术资讯平台</h1>
-				<p class="page_desc">积小流化江海，为技术加油！(更新于<?php echo $last_time ?>)</p>
+				<h1 class="page_title">技术资讯开放平台</h1>
+				<p class="page_desc">聚焦最新Android资讯(<?php echo $yesterday ?>)</p>
 			</div>
 
-					<div id="home_ios_container" class="weui_panel weui_panel_access tab_hide">
-						<div class="weui_panel_hd">iOS、Swift、iOS开发(<?php echo $today ?>)</div>
-						<div class="weui_panel_bd">
-							<?php
-								$sql ="select * from infos where time = '" . $today . "'  and category in ('iOS', 'Swift', 'iOS开发') order by id desc"; //SQL语句
-								$result = mysql_query($sql,$conn); //查询
-								while($row = mysql_fetch_array($result))
-								{
-									if (empty($row["title"])) {
-										continue;
-									}
-									echo "<a href=\"" . $row["link"] . "\" target=\"_blank\" class=\"weui_media_box weui_media_appmsg\">";
-									echo "<div class=\"weui_media_hd\"><img onclick=\"itemActionMore(this)\" class=\"weui_media_appmsg_thumb\" src=\"http://www.atool.org/placeholder.png?size=120x120&text=" . $row["source"] . "&&bg=AB3F49&fg=fff\"></div>";
-									echo "<div class=\"weui_media_bd\">";
-									echo "<h4 class=\"weui_media_title\">" . $row["title"] ."</h4>";
-									echo "<p class=\"weui_media_desc\">" . $row["summary"] . "</p>";
-									echo "</div>";
-									echo "</a>";
-								}
-							?>
-						</div>
-						<a class="weui_panel_ft" href="javascript:void(0);">加载下一页</a>
-					</div>
+			<div id="home_android_container" class="weui-panel weui-panel_access tab_hide">
+			<div class="weui-panel__hd">昨日推荐(
+					<?php
+						echo $yesterday;
+					?>
+					)
+			</div>
+			<div class="weui-panel__bd">
+			<?php
+				$sql ="select * from feed where time = '" . $yesterday . "' and priority=1 and (tag like '%Android%' or tag like '%Java%') order by id desc"; //SQL语句
+				$result = mysql_query($sql,$conn); //查询
+				while($row = mysql_fetch_array($result))
+				{
+					if (empty($row["title"])) {
+						continue;
+					}
+					echo "<a href=\"" . $row["link"] . "\" target=\"_blank\" class=\"weui-media-box weui-media-box_appmsg\">";
+					echo "<div class=\"weui-media-box__bd\">";
+					echo "<h4 class=\"weui-media-box__title\">" . $row["title"] ."</h4>";
+					echo "<p class=\"weui-media-box__desc\">" . $row["summary"] . "</p>";
+					echo "<ul class=\"weui-media-box__info\">";
+					echo "    <li class=\"weui-media-box__info__meta\">" . $utils->getWellTimeByTimestamp($row["created"]) ."</li>";
+					echo "    <li class=\"weui-media_text_info__meta weui-media_text_info__meta_extra\">" . $row["source"]. "</li>";
+					echo "</ul>";
+					echo "</div>";
+					echo "</a>\n";
+				}
+			?>
+			</div>
 		</div>
+			<br />
+			<br />
+			<br />
+			<div class="weui-footer">
+				<p class="weui-footer__links">
+					<a href="https://github.com/openproject/TechInfo" class="weui-footer__link">搜索</a>
+					<a href="http://www.jayfeng.com" class="weui-footer__link">杰风居出品</a>
+					<a href="https://github.com/openproject/TechInfo" class="weui-footer__link">Github</a>
+				</p>
+				<p class="weui-footer__text">Copyright &copy; 20015-2016 jayfeng.com</p>
+			</div>
 	</body>
 </html>
