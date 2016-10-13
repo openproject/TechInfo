@@ -25,8 +25,12 @@ class Geek(object):
         for searchUserItem in search_user_items:
             geeklist = searchUserItem.find_all("span", class_=re.compile("tracking-ad"))
 
-            link = geeklist[1].a["href"]
-            title = geeklist[1].a.contents[0]
+            index = 2
+            if (len(geeklist) < 3):
+               index = 1
+
+            link = geeklist[index].a["href"]
+            title = geeklist[index].a.contents[0]
             category = searchUserItem.ul.find_all("li")[2].a.contents[0]
             tag = category
 
