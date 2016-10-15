@@ -6,6 +6,8 @@ import sys
 curPath = os.path.abspath(os.path.dirname(__file__))
 rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
+
+from config.config import Config as config
 from android.geek import Geek
 from android.gank import Gank
 from common.github import GithubTrending
@@ -13,6 +15,7 @@ from android.toutiao import Toutiao
 from android.androidweekly import AndroidWeekly
 from android.cnblogs import Cnblogs
 from android.iteye import Iteye
+from common.rss_channel import RssChannel
 
 class Android:
     def __init__(self, conn):
@@ -47,3 +50,5 @@ class Android:
         iteye = Iteye(self.conn)
         iteye.start_basic_list()
         print("end Iteye ... ...")
+        rss = RssChannel(self.conn, "https://www.androiddevdigest.com/feed/", "Android", "Android", "AndroidDevDigest", config.priority_high)
+        rss.run()
