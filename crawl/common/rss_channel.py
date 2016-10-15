@@ -1,4 +1,5 @@
 import feedparser
+import re
 from common.common import Common as common
 
 class RssChannel(object):
@@ -20,6 +21,10 @@ class RssChannel(object):
             title = entry.title
             summary = entry.summary
             link = entry.link
+
+            # clean the HTML tag
+            re_html = re.compile('</?\w+[^>]*>')
+            summary = re_html.sub('', summary)
 
             # print("title:" + title)
             # print("summary:" + summary)
