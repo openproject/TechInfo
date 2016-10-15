@@ -52,3 +52,5 @@ class Android:
         print("end Iteye ... ...")
         rss = RssChannel(self.conn, "https://www.androiddevdigest.com/feed/", "Android", "Android", "AndroidDevDigest", config.priority_high)
         rss.run()
+        rss = RssChannel(self.conn, "https://android-arsenal.com/rss", "Android", "Android", "Android-Arsenal", config.priority_high)
+        rss.run()
