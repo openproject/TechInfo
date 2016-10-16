@@ -16,6 +16,7 @@ from android.androidweekly import AndroidWeekly
 from android.cnblogs import Cnblogs
 from android.iteye import Iteye
 from common.rss_channel import RssChannel
+from common.weixin import Weixin
 
 class Android:
     def __init__(self, conn):
@@ -54,3 +55,9 @@ class Android:
         rss.run()
         rss = RssChannel(self.conn, "https://android-arsenal.com/rss", "Android", "Android", "Android-Arsenal", config.priority_high)
         rss.run()
+        # weixin = Weixin(self.conn, "http://mp.weixin.qq.com/profile?src=3&timestamp=1476624231&ver=1&signature=12EpLYsuGUut2p1pCW7VHlz0FlB82QD1VJfVPVN9RUrYlDlQrTXDiGNPH*N0gdtqNYmwukq4WDgJEFSxQ003mw==", "数据库", "数据库", "微信", config.priority_high)
+        # weixin.run()
+        # weixin = Weixin(self.conn, "http://mp.weixin.qq.com/profile?src=3&timestamp=1476635684&ver=1&signature=3QkYMCqDP2*L3XBY1BABfq92jIQMfvaLQLuEh0vHKpta50WYeRFBSUKm5k9MXLxKDSk8E26ue7-ViYAzJP7b*A==", "Android", "Android", "郭霖-微信公众号", config.priority_high)
+        # weixin.run()
+        # weixin = Weixin(self.conn, "http://mp.weixin.qq.com/profile?src=3&timestamp=1476635914&ver=1&signature=BOpbVqXaDOTPOrwB*XEVBHQYUtRqur9ln-9xM6Tiskb2Ww4-1hBnvrKOJ5vPzKwbVasoPGPj8ocK5RzQdwO*ig==", "Android", "Android", "鸿洋-微信公众号", config.priority_high)
+        # weixin.run()
