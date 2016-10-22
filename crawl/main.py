@@ -10,6 +10,7 @@ rootPath = os.path.split(curPath)[0]
 sys.path.append(rootPath)
 from common.common import Common as common
 from android.android import Android
+from android.androidblogs import AndroidBlogs
 from config.config import Config as config
 
 if __name__ == "__main__":
@@ -28,6 +29,10 @@ if __name__ == "__main__":
     android = Android(connection)
     android.run()
     print("###############结束抓取Android模块##################")
+    print("###############开始抓取Android博客模块##################")
+    androidblogs = AndroidBlogs(connection)
+    androidblogs.run()
+    print("###############结束抓取Android博客模块##################")
 
     # 更新时间
     common.updateLastTime(connection)
