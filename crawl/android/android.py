@@ -11,6 +11,7 @@ from config.config import Config as config
 from android.geek import Geek
 from android.gank import Gank
 from common.github import GithubTrending
+from common.jianshu_collection import JianshuCollection
 from android.toutiao import Toutiao
 from android.androidweekly import AndroidWeekly
 from android.cnblogs import Cnblogs
@@ -51,6 +52,12 @@ class Android:
         iteye = Iteye(self.conn)
         iteye.start_basic_list()
         print("end Iteye ... ...")
+        print("start Jianshu ... ...")
+        jianshu_collection = JianshuCollection(self.conn, "http://www.jianshu.com/collection/3fde3b545a35", "Android", "Android", "Android知识", config.priority_mid)
+        jianshu_collection.run()
+        jianshu_collection = JianshuCollection(self.conn, "http://www.jianshu.com/collection/5139d555c94d", "Android", "Android", "Android开发经验谈", config.priority_mid)
+        jianshu_collection.run()
+        print("end Jianshu ... ...")
         print("start androidweekly ... ...")
         rss = RssChannel(self.conn, "https://www.androiddevdigest.com/feed/", "Android", "Android", "AndroidDevDigest", config.priority_high)
         rss.run()
