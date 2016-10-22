@@ -25,6 +25,8 @@ class RssChannel(object):
             # clean the HTML tag
             re_html = re.compile('</?\w+[^>]*>')
             summary = re_html.sub('', summary)
+            if len(summary) > 480:
+                summary = summary[0:480] + "..."
 
             # print("title:" + title)
             # print("summary:" + summary)
