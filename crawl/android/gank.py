@@ -15,7 +15,9 @@ class Gank(object):
         soup = bs(resp, "html.parser")
         search_user_items = soup.find_all("div", class_=re.compile("outlink"))
         for searchUserItem in search_user_items:
+            print(searchUserItem)
             print("=========ios:")
+            print(searchUserItem.find_all("ul", recursive=False))
             ios = searchUserItem.find_all("ul", recursive=False)[0]
             for li in ios.find_all("li", recursive=False):
                 title = li.a.contents[0]
@@ -23,8 +25,8 @@ class Gank(object):
                 common.insertInfoToDb(self.conn, title, '', link, 'iOS', 'iOS', '干货集中营', config.priority_high)
 
             print("=========android:")
-            ios = searchUserItem.find_all("ul", recursive=False)[1]
-            for li in ios.find_all("li", recursive=False):
+            android = searchUserItem.find_all("ul", recursive=False)[1]
+            for li in android.find_all("li", recursive=False):
                 title = li.a.contents[0]
                 link =  li.a["href"]
                 common.insertInfoToDb(self.conn, title, '', link, 'Android', 'Android', '干货集中营', config.priority_high)

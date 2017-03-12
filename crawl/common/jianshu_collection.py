@@ -21,12 +21,19 @@ class JianshuCollection(object):
     def run(self):
         resp = urlopen(self.url)
         soup = bs(resp, "html.parser")
-        article_list_ul = soup.find_all("ul", class_=re.compile("article-list"))[0]
+        article_list_ul = soup.find_all("ul", class_=re.compile("note-list"))[0]
         article_list_lis = article_list_ul.find_all("li")
 
         for article_li in article_list_lis:
 
-            link = "http://www.jianshu.com" + article_li.h4.a["href"]
-            title = article_li.h4.a.contents[0]
+            article_li_a = article_li.div.find_all("a", class_=re.compile("title"))[0]
+            print(article_li_a)
+            link = "http://www.jianshu.com" + article_li.a["href"]
+            title = article_li_a.contents[0]
+            summary = article_li.div.p.contents[0].strip()
 
-            common.insertInfoToDb(self.conn, title, "", link, self.category, self.tag, self.source, self.priority)
+            # print(link)
+            # print("====title:" + title)
+            # print(summary)
+
+            common.insertInfoToDb(self.conn, title, summary, link, self.category, self.tag, self.source, self.priority)

@@ -25,8 +25,8 @@ class Android:
 
     def run(self):
         print("开始抓取gank数据...")
-        gank = Gank(self.conn)
-        gank.start_basic_list()
+        # gank = Gank(self.conn)
+        # gank.start_basic_list()
         print("抓取gank数据结束。")
         print("start geek ... ...")
         geek = Geek(self.conn)
